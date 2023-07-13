@@ -1,15 +1,19 @@
 #include <stdio.h>
 
-int main()
+/**
+ * main = starting work;
+ */
+int main(void)
 {
-        int day;
-        char name[50];
-        char month[18];
+	int day;
+	char name[50];
+	char month[18];
 
-        printf("your name, month of birth, day of birth:\n");
-        scanf("%s %s %d", name, month, &day);
+	printf("your name, month of birth, day of birth:\n");
+	scanf("%s %s %d", name, month, &day);
 
-        printf("ooh %s you are a %s born \nyour birthday is on %dth of %s\n", name,month,day,month);
+	printf("ooh %s you are a %s born \n
+	your birthday is on %dth of %s\n", name, month, day, month);
 
-        return (0);
+	return (0);
 }
