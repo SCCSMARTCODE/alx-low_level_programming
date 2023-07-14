@@ -10,7 +10,7 @@ int main(void)
 {
 	int luck;
 
-	for(luck = 0; luck <= 9; luck++)
+	for (luck = 0; luck <= 9; luck++)
 	{
 		printf("%d", luck);
 	}
