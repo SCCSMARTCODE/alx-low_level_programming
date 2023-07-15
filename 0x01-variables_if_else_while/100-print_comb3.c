@@ -5,44 +5,29 @@
  *
  * Return: Always 0 (success)
  */
-
 int main(void)
 {
-	int Good;
-	int zero;
+	int firstDigit;
 
-	zero = 0;
-
-	for (Good = 1; Good <= 89; Good++)
+	for (firstDigit = 0; firstDigit <= 8; firstDigit++)
 	{
-		if (Good < 10)
-		{
-			putchar(zero + '0');
-		}
-		if (Good == 10 || Good == 11 || Good == 20 || Good == 21 || Good == 22)
-		{
-			continue;
-		}
-		if ((Good > 29 && Good < 34) || (Good > 39 && Good < 45))
-		{
-			continue;
-		}
-		if ((Good > 59 && Good < 67) || (Good > 49 && Good < 56))
-		{
-			continue;
-		}
-		if ((Good > 69 && Good < 78) || (Good > 79 && Good < 89))
-		{
-			continue;
-		}
+		int secondDigit;
 
-		putchar(Good + '0');
-		if (Good != 89)
+		for (secondDigit = firstDigit + 1; secondDigit <= 9; secondDigit++)
 		{
-			putchar(',');
-			putchar(' ');
+			putchar(firstDigit + '0');
+			putchar(secondDigit + '0');
+
+			if (!(firstDigit == 8 && secondDigit == 9))
+			{
+				putchar(',');
+				putchar(' ');
+			}
 		}
 	}
 
+	putchar('\n');
+
 	return (0);
 }
+
