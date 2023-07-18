@@ -13,9 +13,14 @@
 int _abs(int x)
 {
 
-	int y = abs(x);
+	if (x < 0)
+	{
+		int y;
 
-	printf("%d", y);
+		y = x * -1;
 
-	return (y);
+		return (y);
+	}
+
+	return (x);
 }
