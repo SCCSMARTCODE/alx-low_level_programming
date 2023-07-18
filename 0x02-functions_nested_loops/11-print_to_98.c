@@ -42,7 +42,7 @@ void print_to_98(int n)
 		{
 			i = n;
 
-			printf("%d\n", i);
+			printf("%d", i);
 		}
 
 	}
