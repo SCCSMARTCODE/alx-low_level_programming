@@ -14,8 +14,9 @@ int main(void)
 	for (i = 0; i < 8; i++)
 	{
 		putchar(putch[i]);
-		putchar('\n');
 	}
+
+	putchar('\n');
 
 	return (0);
 }
