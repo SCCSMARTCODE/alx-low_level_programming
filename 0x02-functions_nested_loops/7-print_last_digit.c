@@ -12,13 +12,11 @@ int print_last_digit(int no)
 {
 	int ans;
 
-
-	if(no < 0)
+	if (no < 0)
 	{
 		no = -no;
 	}
 
-	
 	ans = no % 10;
 
 	_putchar(ans + '0');
