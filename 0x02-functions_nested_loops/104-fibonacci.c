@@ -15,7 +15,7 @@ int main(void)
 	first_no = 0;
 	sec_no = 1;
 
-	for (i = 2; i <= 98; i++)
+	for (i = 5; i <= 98; i++)
 	{
 		counting_no = first_no + sec_no;
 
