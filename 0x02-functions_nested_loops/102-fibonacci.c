@@ -8,21 +8,22 @@
 
 int main() {
 	int n = 50;
-	long long int fib[50];
+	long int fib[50];
+	int i;
     
 	fib[0] = 1;
 	fib[1] = 2;
     
-	for (int i = 2; i < n; i++)
+	for (i = 2; i < n; i++)
 	{
 		fib[i] = fib[i-1] + fib[i-2];
 	}
 
-	for (int i = 0; i < n-1; i++) {
-		printf("%lld, ", fib[i]);
+	for (i = 0; i < n - 1; i++) {
+		printf("%ld, ", fib[i]);
 	}
 
-	printf("%lld\n", fib[n-1]);
+	printf("%ld\n", fib[n-1]);
 
 	return 0;
 }
