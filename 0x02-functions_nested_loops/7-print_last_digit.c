@@ -20,7 +20,7 @@ int print_last_digit(int no)
 
 	ans = no % 10;
 
-	printf("%d", ans);
+	_putchar(ans + '0');
 
 	return (ans);
 }
