@@ -12,10 +12,10 @@ int main(void)
 	unsigned long counting_no;
 	int i;
 
-	first_no = 0;
-	sec_no = 1;
+	first_no = 1;
+	sec_no = 2;
 
-	for (i = 5; i <= 98; i++)
+	for (i = 1; i <= 98; i++)
 	{
 		counting_no = first_no + sec_no;
 
