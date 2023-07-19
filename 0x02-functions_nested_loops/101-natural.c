@@ -11,12 +11,10 @@ int main(void)
 	int f_no = 3;
 	int s_no = 5;
 	int fl_no, sl_no;
-	int sum1;
-	int sum2;
-	int sumt;
-	float n1;
-	float n2;
+	int sum1, sum2, sumt;
+	float n1, n2;
 	int pnn;
+	int lcm_no, lcm_count, sum_lcm;
 
 	for (pnn = 3; pnn <= 1024; pnn++)
 	{
@@ -31,8 +29,11 @@ int main(void)
 	n2 = sl_no / s_no;
 	sum2 = (n2 / 2) * (s_no + sl_no);
 
+	lcm_no = 15;
+	lcm_count = max_no / lcm_no;
+	sum_lcm = (lcm_count / 2) * (lcm_no + lcm_no * lcm_count);
 
-	sumt = sum1 + sum2;
+	sumt = sum1 + sum2 - sum_lcm;
 	printf("%d\n", sumt);
 
 
