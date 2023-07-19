@@ -3,7 +3,7 @@
 /**
  * main - Entry point
  *
- * Return:0 (Grace of God be with me)
+ * Return: 0 (SUCCESS)
  */
 int main(void)
 {
@@ -16,6 +16,11 @@ int main(void)
 	int sumt;
 	float n1;
 	float n2;
+	int pnn;
+
+	for (pnn = 3; pnn <= 1024; pnn++)
+	{
+	}
 
 	fl_no = max_no - (max_no % f_no);
 	n1 = fl_no / f_no;
