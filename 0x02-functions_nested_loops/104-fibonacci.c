@@ -7,24 +7,26 @@
  */
 int main(void)
 {
-	unsigned long first_no;
-	unsigned long sec_no;
-	unsigned long counting_no;
+	unsigned long long first_no;
+	unsigned long long sec_no;
+	unsigned long long counting_no;
 	int i;
 
 	first_no = 1;
 	sec_no = 2;
 
-	for (i = 1; i <= 98; i++)
+	printf("%llu, %llu, ", first_no, sec_no);
+
+	for (i = 2; i < 98; i++)
 	{
 		counting_no = first_no + sec_no;
 
 		first_no = sec_no;
 		sec_no = counting_no;
 
-		printf("%lu", counting_no);
+		printf("%llu", counting_no);
 
-		if (i != 98)
+		if (i != 97)
 		{
 			printf(", ");
 		}
