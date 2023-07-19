@@ -7,35 +7,32 @@
  */
 int main(void)
 {
-	unsigned long first_no = 2;
-	unsigned long sec_no = 4;
+	unsigned long first_no = 1;
+	unsigned long sec_no = 2;
 	unsigned long counting_no;
-	int i;
+	unsigned long sum = 2;
 
-	printf("%lu, %lu, ", first_no, sec_no);
 
-	for (i = 2; i < 98; i++)
+	while (1)
 	{
 		counting_no = first_no + sec_no;
-
-		first_no = sec_no;
-		sec_no = counting_no;
 
 		if (counting_no > 4000000)
 		{
 			break;
 		}
 
-		printf("%lu", counting_no);
-
-		if (i < 29)
+		if (counting_no % 2 == 0)
 		{
-			printf(", ");
+			sum += counting_no;
 		}
+
+		first_no = sec_no;
+		sec_no = counting_no;
 
 	}
 
-	printf("\n");
+	printf("%lu\n", sum);
 
 	return (0);
 }
