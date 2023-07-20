@@ -18,6 +18,6 @@ int main(void)
 
 	printf("%ld\n", largest_prime_factor);
 
-	return 0;
+	return (0);
 }
 
