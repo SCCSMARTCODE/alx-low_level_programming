@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define PASSWORD_LENGTH 62
+#define PASSWORD_LENGTH 11
 
 /**
  * main - Generates a random valid password
@@ -12,14 +12,14 @@
 int main(void)
 {
     char password[PASSWORD_LENGTH + 1];
-    const char valid_chars[PASSWORD_LENGTH] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    const char valid_chars[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     int i, rand_index;
 
     srand(time(0));
 
     for (i = 0; i < PASSWORD_LENGTH; i++)
     {
-        rand_index = rand() % PASSWORD_LENGTH;
+        rand_index = rand() % (sizeof(valid_chars) - 1);
         password[i] = valid_chars[rand_index];
     }
     password[PASSWORD_LENGTH] = '\0';
