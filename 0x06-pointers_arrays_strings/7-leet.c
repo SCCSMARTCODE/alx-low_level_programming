@@ -20,13 +20,12 @@ char *leet(char *str)
 	{
 	for (i = 0; leet_chars[i]; i++)
 	{
-	if (*ptr == leet_chars[i])	
+	if (*ptr == leet_chars[i])
 	{
 	*ptr = leet_nums[i];
 	break;
 	}
-        }
-
+	}
 		ptr++;
 	}
 	return (str);
