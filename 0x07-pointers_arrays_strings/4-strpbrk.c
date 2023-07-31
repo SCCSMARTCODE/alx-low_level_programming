@@ -2,13 +2,12 @@
 #include <stdio.h>
 
 /**
- * _strpbrk - locates the first occurrence of any byte from accept in the string s.
+ * _strpbrk - locates the first occurrence..
  *
  * @s: the string to search in
  * @accept: the set of bytes to search for
  *
- * Return: a pointer to the byte in s that matches one of the bytes in accept,
- * or NULL if no such byte is found.
+ * Return: a pointer to
  */
 char *_strpbrk(char *s, char *accept)
 {
