@@ -5,7 +5,7 @@
  * @s: input string
  * @accept: substring to search for
  *
- * Return: Number of bytes in the initial 
+ * Return: Number of bytes in the initial
  */
 unsigned int _strspn(char *s, char *accept)
 {
@@ -21,7 +21,7 @@ unsigned int _strspn(char *s, char *accept)
 	count++;
 	break;
 	}
-        }
+	}
 	if (!accept[j])
 	break;
 	}
