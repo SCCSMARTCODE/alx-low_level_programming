@@ -7,7 +7,6 @@
  * Return: Always 0.
  */
 
-int is_palindrome(char *s);
 
 int main(void)
 {
