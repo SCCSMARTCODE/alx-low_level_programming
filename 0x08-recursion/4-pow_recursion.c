@@ -2,7 +2,7 @@
 
 /**
  * _pow_recursion - x raised to the power of y
- * 
+ *
  * @x: parameter1
  * @y: parameter2
  * Return: If y is lower than 0, the function should return -1

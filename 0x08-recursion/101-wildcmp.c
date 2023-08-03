@@ -1,10 +1,10 @@
 #include "main.h"
 
 /**
- * wildcmp - compares two strings and returns 1 if they can be considered identical,
- *            otherwise returns 0.
+ * wildcmp - compares two strings and returns 1
+ *
  * @s1: The first string to compare.
- * @s2: The second string to compare, which can contain the special character *.
+ * @s2: The scontain the special
  *
  * Return: 1 if the strings are identical, 0 otherwise.
  */
