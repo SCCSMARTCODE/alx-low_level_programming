@@ -11,18 +11,13 @@ int _strlen(char *s);
  */
 int _strlen(char *s)
 {
-	int len = 0;
-
-	while (*s != '\0')
-	{
-	len++;
-	s++;
-	}
-	return len;
+	if (*s == '\0')
+		return (0);
+	return (1 + _strlen(s + 1));
 }
 
 /**
- * is_palindrome_helper - helper function to check if a string is a palindrome recursively
+ * is_palindrome_helper - helper function to check if a string
  * @s: the input string
  * @start: start index of the string
  * @end: end index of the string
