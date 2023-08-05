@@ -11,9 +11,9 @@
 
 int main(int argc, char *argv[])
 {
-	int index, mult;
+	int index, multiplication;
 
-	mult = 1;
+	multiplication = 1;
 	if (argc < 3)
 	{
 		printf("Error\n");
@@ -21,9 +21,9 @@ int main(int argc, char *argv[])
 	}
 	for (index = 1; index < argc; index++)
 	{
-		mult = mult *atio(argv[index]);
+		multiplication = multiplication * atoi(argv[index]);
 	}
-	printf ("%d\n", mult);
+	printf("%d\n", multiplication);
 	return (0);
 
 }
