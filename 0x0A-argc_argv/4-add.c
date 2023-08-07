@@ -3,7 +3,7 @@
 	#include <ctype.h>
 	#include <string.h>
 	/**
-	 * check_num - check - string there are digit
+	 * check_num - Check if a string contains only digits
 	 * @str: array str
 	 *
 	 * Return: Always 0 (Success)
@@ -32,7 +32,7 @@
 
 
 	/**
-	 * main - Print the name of the program
+	 * main - Entry point of the program
 	 * @argc: Count arguments
 	 * @argv: Arguments
 	 *
