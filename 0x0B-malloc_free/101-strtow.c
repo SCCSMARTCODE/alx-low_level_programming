@@ -2,137 +2,79 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int count_words(char *str);
-char **allocate_words(char *str, int word_count);
-void copy_characters(char **words, char *str);
-
 /**
- * strtow - Splits a string into words.
- * @str: The input string
+ * strtow - Splits a string into words
+ * @str: The string to split
  *
- * Return: A pointer to an array of strings (words),
- *         or NULL if str == NULL or str == "" or if the function fails.
+ * Return: A pointer to an array of strings (words), or NULL on failure
  */
-
 char **strtow(char *str)
 {
-	char **words;
-	int word_count;
 
-	if (str == NULL || str[0] == '\0')
-	return (NULL);
+    int num_words;
+    int i, j, word_length;
+    int word_index;
+    int word_start;
+    char **words;
 
-	word_count = count_words(str);
-	if (word_count == 0)
-	return (NULL);
+        if (str == NULL || *str == '\0')
+        return (NULL);
 
-	words = allocate_words(str, word_count);
-	if (words == NULL)
-	return (NULL);
+    num_words = 0;
 
-	copy_characters(words, str);
 
-	return (words);
-}
+    for (i = 0; str[i] != '\0'; i++)
+    {
+        if (str[i] != ' ' && (str[i + 1] == ' ' || str[i + 1] == '\0'))
+        {
+            num_words++;
+        }
+    }
 
-/**
- * count_words - Counts the number of words in a string.
- * @str: The input string
- *
- * Return: The number of words in the string.
- */
+    if (num_words == 0)
+        return (NULL);
 
-int count_words(char *str)
-{
-	int word_count = 0;
-	int in_word = 0;
-	int i;
+   words = (char **)malloc((num_words + 1) * sizeof(char *));
+    if (words == NULL)
+        return (NULL);
 
-	for (i = 0; str[i] != '\0'; i++)
-	{
-	if (str[i] != ' ' && !in_word)
-	{
-	in_word = 1;
-	word_count++;
-	}
-	else if (str[i] == ' ')
-	{
-	in_word = 0;
-	}
-	}
+    word_index = 0;
+    word_start = 0;
 
-	return (word_count);
-}
+    for (i = 0; str[i] != '\0'; i++)
+    {
+        if (str[i] != ' ')
+        {
+            word_start = i;
 
-/**
- * allocate_words - Allocates memory for an array of words.
- * @str: The input string
- * @word_count: The number of words
- *
- * Return: A pointer to the allocated array of words, or NULL if allocation
- */
+            while (str[i] != ' ' && str[i] != '\0')
+            {
+                i++;
+            }
 
-char **allocate_words(char *str, int word_count)
-{
-	int i;
-	int word_length, j;
+            word_length = i - word_start;
 
-	char **words = (char **)malloc((word_count + 1) * sizeof(char *));
+            words[word_index] = (char *)malloc((word_length + 1) * sizeof(char));
+            if (words[word_index] == NULL)
+            {
+                for (j = 0; j < word_index; j++)
+                {
+                    free(words[j]);
+                }
+                free(words);
+                return (NULL);
+            }
 
-	if (words == NULL)
-	return (NULL);
+            for (j = 0; j < word_length; j++)
+            {
+                words[word_index][j] = str[word_start + j];
+            }
+            words[word_index][word_length] = '\0';
 
-	i = 0;
-	while (*str != '\0')
-	{
-	while (*str == ' ')
-	str++;
+            word_index++;
+        }
+    }
 
-	word_length = 0;
-	while (str[word_length] != ' ' && str[word_length] != '\0')
-	word_length++;
-
-	words[i] = (char *)malloc((word_length + 1) * sizeof(char));
-	if (words[i] == NULL)
-	{
-	for (j = 0; j < i; j++)
-	free(words[j]);
-	free(words);
-	return (NULL);
-	}
-
-	i++;
-	str += word_length;
-	}
-
-	words[i] = NULL;
-	return (words);
-}
-
-/**
- * copy_characters - Copies characters from a string to an array of words.
- * @words: The array of words
- * @str: The input string
- */
-
-void copy_characters(char **words, char *str)
-{
-	int i = 0, word_length, j;
-
-	while (*str != '\0')
-	{
-	while (*str == ' ')
-	str++;
-
-	word_length = 0;
-	while (str[word_length] != ' ' && str[word_length] != '\0')
-	word_length++;
-
-	for (j = 0; j < word_length; j++)
-	words[i][j] = str[j];
-
-	words[i][word_length] = '\0';
-	i++;
-	str += word_length;
-	}
+    words[num_words] = NULL;
+    return (words);
 }
