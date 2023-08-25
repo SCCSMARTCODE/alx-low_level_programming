@@ -1,34 +1,33 @@
 #include <stdio.h>
-#include "main.h"
 
 /**
- * rot13 - applies ROT13 substitution cipher to a string.
- * @val: input string
+ * rot13 - Encodes a string using the ROT13 cipher.
+ * @s: The input string to be encoded.
  *
- * Return: Pointer to the resulting string
+ * Return: A pointer to the encoded string.
  */
-
-char *rot13(char *val)
+char *rot13(char *s)
 {
-int i;
+	char *ptr = s;
+	char c;
+	int i;
 
-i = 0;
+	while ((c = *ptr))
+	{
+		for (i = 0; i < 2; i++)
+		{
+			int diff = (i == 0) ? 13 : -13;
 
-while (val[i] != '\0')
+			if ((c >= 'a' && c <= 'z' && c + diff > 'z') ||
+			    (c >= 'A' && c <= 'Z' && c + diff > 'Z'))
+			{
+				c -= 26;
+			}
 
-{
-if (((val[i] >= 97) && (val[i] <= 109)) || ((val[i] >= 65) && (val[i] <= 77)))
-{
-val[i] = val[i] + 13;
-}
-else if ((val[i] >= 110 && val[i] <= 122) || (val[i] >= 78 && val[i] <= 90))
-{
-val[i] = val[i] - 13;
-}
-
-i++;
-}
-
-return (val);
+			*ptr = c + diff;
+		}
+		ptr++;
+	}
+	return (s);
 }
 
