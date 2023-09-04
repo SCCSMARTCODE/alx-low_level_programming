@@ -4,7 +4,7 @@
 #include <fcntl.h>
 
 /**
- * create_file - Creates a file with the given filename and writes text content.
+ * create_file - Creates a file with the given filename and
  * @filename: The name of the file to create.
  * @text_content: A NULL-terminated string to write to the file.
  *
