@@ -1,41 +1,40 @@
-#include <stddef.h>
 #include "main.h"
 #include <stdio.h>
 #include <stdlib.h>
 
+char *allocate_buffer(void);
+void close_fd(int fd);
+
 /**
- * create_buffer - Allocates 1024 bytes for a buffer.
- * @file_name: The name of the file the buffer is storing chars for.
+ * allocate_buffer - Allocates 1024 bytes for a buffer.
  *
  * Return: A pointer to the newly-allocated buffer.
  */
-char *create_buffer(const char *file_name)
+char *allocate_buffer(void)
 {
-	char *file_buffer;
+	char *buffer;
 
-	file_buffer = malloc(1024);
+	buffer = malloc(1024);
 
-	if (file_buffer == NULL)
+	if (buffer == NULL)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", file_name);
-		exit(99);
+		dprintf(STDERR_FILENO, "Error: Can't allocate memory\n");
+		exit(EXIT_FAILURE);
 	}
 
-	return (file_buffer);
+	return (buffer);
 }
 
 /**
- * close_file - Closes a file descriptor.
- * @file_desc: The file descriptor to be closed.
- * @file_name: The name of the file being closed.
+ * close_fd - Closes a file descriptor.
+ * @fd: The file descriptor to be closed.
  */
-void close_file(int file_desc, const char *file_name)
+void close_fd(int fd)
 {
-	if (close(file_desc) == -1)
+	if (close(fd) == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", file_desc);
-		free((void *)file_name);
-		exit(100);
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd);
+		exit(EXIT_FAILURE);
 	}
 }
 
@@ -53,7 +52,7 @@ void close_file(int file_desc, const char *file_name)
  */
 int main(int argc_copy, char *argv_copy[])
 {
-	int source_file_desc, target_file_desc, read_count, write_count;
+	int source_fd, target_fd, read_count, write_count;
 	char *data_buffer;
 
 	if (argc_copy != 3)
@@ -62,51 +61,51 @@ int main(int argc_copy, char *argv_copy[])
 		exit(97);
 	}
 
-	data_buffer = create_buffer(argv_copy[2]);
-	source_file_desc = open(argv_copy[1], O_RDONLY);
-	if (source_file_desc == -1)
+	data_buffer = allocate_buffer();
+	source_fd = open(argv_copy[1], O_RDONLY);
+	if (source_fd == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv_copy[1]);
 		free(data_buffer);
 		exit(98);
 	}
 
-	target_file_desc = open(argv_copy[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
-	if (target_file_desc == -1)
+	target_fd = open(argv_copy[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
+	if (target_fd == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't write to file %s\n", argv_copy[2]);
 		free(data_buffer);
-		close_file(source_file_desc, argv_copy[1]);
+		close_fd(source_fd);
 		exit(99);
 	}
 
 	do {
-		read_count = read(source_file_desc, data_buffer, 1024);
+		read_count = read(source_fd, data_buffer, 1024);
 		if (read_count == -1)
 		{
 			dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv_copy[1]);
 			free(data_buffer);
-			close_file(source_file_desc, argv_copy[1]);
-			close_file(target_file_desc, argv_copy[2]);
+			close_fd(source_fd);
+			close_fd(target_fd);
 			exit(98);
 		}
 
-		write_count = write(target_file_desc, data_buffer, read_count);
+		write_count = write(target_fd, data_buffer, read_count);
 		if (write_count == -1)
 		{
 			dprintf(STDERR_FILENO, "Error: Can't write to file %s\n", argv_copy[2]);
 			free(data_buffer);
-			close_file(source_file_desc, argv_copy[1]);
-			close_file(target_file_desc, argv_copy[2]);
+			close_fd(source_fd);
+			close_fd(target_fd);
 			exit(99);
 		}
 
 	} while (read_count > 0);
 
 	free(data_buffer);
-	close_file(source_file_desc, argv_copy[1]);
-	close_file(target_file_desc, argv_copy[2]);
+	close_fd(source_fd);
+	close_fd(target_fd);
 
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
