@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
 	if (argc != 2)
 	{
 		printf("Correct usage: ./keygen5 username\n");
-		return 1;
+		return (1);
 	}
 	len = strlen(argv[1]);
 	key[0] = c[(len ^ 59) & 63];
@@ -42,6 +42,6 @@ int main(int argc, char *argv[])
 		b = rand();
 	key[5] = c[(b ^ 229) & 63];
 	printf("%s\n", key);
-	return 0;
+	return (0);
 }
 
