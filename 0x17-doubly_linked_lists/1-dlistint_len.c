@@ -1,6 +1,12 @@
 #include <stdio.h>
 #include "lists.h"
 
+
+/**
+ * dlistint_len - main prororo
+ * @h: pla 1
+ * Return: i always
+ */
 size_t dlistint_len(const dlistint_t *h)
 {
 	int i = 0;
