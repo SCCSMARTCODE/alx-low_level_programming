@@ -41,6 +41,6 @@ dlistint_t *add_dnodeint_end(dlistint_t **head, const int n)
 		tail->next = new;
 	}
 
-	return new; /* Return the new node that was added to the end */
+	return (new); /* Return the new node that was added to the end */
 }
 
