@@ -1,4 +1,4 @@
-#include "search_algos.g"
+#include "search_algos.h"
 
 /**
  * binary_search - Perform binary search on a sorted array
