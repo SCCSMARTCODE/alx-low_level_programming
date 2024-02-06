@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include "search_algos.h"
 /**
  * linear_search - This is a function that performs a silmple linear search
  *
