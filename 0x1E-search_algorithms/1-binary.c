@@ -1,4 +1,4 @@
-#include "search_algos.h"
+#include "search_algos.g"
 
 /**
  * binary_search - Perform binary search on a sorted array
@@ -10,7 +10,11 @@
  */
 int binary_search(int *array, size_t size, int value)
 {
+
 	size_t big = 0, end = size - 1, mid = (end + big) / 2, x;
+
+	if (!array)
+		return (-1);
 
 	do {
 		x = big;
