@@ -1,6 +1,8 @@
 #ifndef SEARCH_H
 #define SEARCH_H
 
+#include <stdio.h>
+
 /**
  * struct listint_s - singly linked list
  *
@@ -35,8 +37,6 @@ typedef struct skiplist_s
     struct skiplist_s *express;
 } skiplist_t;
 
-
-#include <stdio.h>
 
 /*prototypes*/
 
