@@ -1,111 +1,72 @@
 #include "main.h"
 #include <stdio.h>
-#include <stdlib.h>
-
-char *allocate_buffer(void);
-void close_fd(int fd);
 
 /**
- * allocate_buffer - Allocates 1024 bytes for a buffer.
- *
- * Return: A pointer to the newly-allocated buffer.
+ * error_file - checks if files can be opened.
+ * @file_from: file_from.
+ * @file_to: file_to.
+ * @argv: arguments vector.
+ * Return: no return.
  */
-char *allocate_buffer(void)
+void error_file(int file_from, int file_to, char *argv[])
 {
-	char *buffer;
-
-	buffer = malloc(1024);
-
-	if (buffer == NULL)
+	if (file_from == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't allocate memory\n");
-		exit(EXIT_FAILURE);
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
+		exit(98);
 	}
-
-	return (buffer);
-}
-
-/**
- * close_fd - Closes a file descriptor.
- * @fd: The file descriptor to be closed.
- */
-void close_fd(int fd)
-{
-	if (close(fd) == -1)
+	if (file_to == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd);
-		exit(EXIT_FAILURE);
+		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
+		exit(99);
 	}
 }
 
 /**
- * main - Copies the contents of a file to another file.
- * @argc_copy: The number of arguments supplied to the program.
- * @argv_copy: An array of pointers to the arguments.
- *
- * Return: 0 on success.
- *
- * Description: If the argument count is incorrect - exit code 97.
- * If file_from does not exist or cannot be read - exit code 98.
- * If file_to cannot be created or written to - exit code 99.
- * If file_to or file_from cannot be closed - exit code 100.
+ * main - check the code for Holberton School students.
+ * @argc: number of arguments.
+ * @argv: arguments vector.
+ * Return: Always 0.
  */
-int main(int argc_copy, char *argv_copy[])
+int main(int argc, char *argv[])
 {
-	int source_fd, target_fd, read_count, write_count;
-	char *data_buffer;
+	int file_from, file_to, err_close;
+	ssize_t nchars, nwr;
+	char buf[1024];
 
-	if (argc_copy != 3)
+	if (argc != 3)
 	{
-		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
+		dprintf(STDERR_FILENO, "%s\n", "Usage: cp file_from file_to");
 		exit(97);
 	}
 
-	data_buffer = allocate_buffer();
-	source_fd = open(argv_copy[1], O_RDONLY);
-	if (source_fd == -1)
+	file_from = open(argv[1], O_RDONLY);
+	file_to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC | O_APPEND, 0664);
+	error_file(file_from, file_to, argv);
+
+	nchars = 1024;
+	while (nchars == 1024)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv_copy[1]);
-		free(data_buffer);
-		exit(98);
+		nchars = read(file_from, buf, 1024);
+		if (nchars == -1)
+			error_file(-1, 0, argv);
+		nwr = write(file_to, buf, nchars);
+		if (nwr == -1)
+			error_file(0, -1, argv);
 	}
 
-	target_fd = open(argv_copy[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
-	if (target_fd == -1)
+	err_close = close(file_from);
+	if (err_close == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't write to file %s\n", argv_copy[2]);
-		free(data_buffer);
-		close_fd(source_fd);
-		exit(99);
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", file_from);
+		exit(100);
 	}
 
-	do {
-		read_count = read(source_fd, data_buffer, 1024);
-		if (read_count == -1)
-		{
-			dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv_copy[1]);
-			free(data_buffer);
-			close_fd(source_fd);
-			close_fd(target_fd);
-			exit(98);
-		}
-
-		write_count = write(target_fd, data_buffer, read_count);
-		if (write_count == -1)
-		{
-			dprintf(STDERR_FILENO, "Error: Can't write to file %s\n", argv_copy[2]);
-			free(data_buffer);
-			close_fd(source_fd);
-			close_fd(target_fd);
-			exit(99);
-		}
-
-	} while (read_count > 0);
-
-	free(data_buffer);
-	close_fd(source_fd);
-	close_fd(target_fd);
-
-	return (EXIT_SUCCESS);
+	err_close = close(file_to);
+	if (err_close == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", file_from);
+		exit(100);
+	}
+	return (0);
 }
-
